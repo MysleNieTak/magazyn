@@ -23,7 +23,7 @@ public class Main {
                 new ObslugaDodajProduktPrzemyslowy(),
                 new ObslugaDodajProduktInne()
         ));
-        System.out.println("Podaj komendę: (dodaj produkt, dodaj sprzedaz, dodaj 3 produkty z kategorii ZYWNOSC");
+        System.out.println("Podaj komendę: (dodaj produkt, dodaj sprzedaz, dodaj 3 x zywnosc)");
         String komenda = scanner.nextLine();
 
 //        if (komenda.equalsIgnoreCase("dodaj produkt")) {

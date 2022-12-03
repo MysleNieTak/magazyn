@@ -1,11 +1,13 @@
 package pl.sda.j133.hibernate.magazyn;
 
+import lombok.Data;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pl.sda.j133.hibernate.magazyn.model.Kategoria;
 import pl.sda.j133.hibernate.magazyn.model.Produkt;
 import pl.sda.j133.hibernate.magazyn.model.Sprzedaz;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
 
@@ -18,7 +20,7 @@ public class ObslugaDodajProduktZywnosc implements ObslugaKomendy {
 
     @Override
     public String getKomenda() {
-        return "dodaj 3 produkty z kategorii ZYWNOSC";
+        return "dodaj 3 x zywnosc";
     }
 
     public void obslugaKomendy() {
@@ -33,18 +35,19 @@ public class ObslugaDodajProduktZywnosc implements ObslugaKomendy {
         String stringLiczba = Main.scanner.nextLine();
         double liczba = Double.parseDouble(stringLiczba);
 
-        System.out.println("Podaj miesiąc sprzedaży od 1 do 3:");
-        String miesSprz = Main.scanner.nextLine();
-        int miesiac = Integer.parseInt(miesSprz);
+        System.out.println("Podaj datę i godzinę sprzedaży między 2020-01-01 a 2020-03-01 (YYYY-MM-DDThh:mm:ss)");
+        String dataSprz = Main.scanner.nextLine();
+        LocalDateTime dataSprzedaży = LocalDateTime.parse(dataSprz);
 
-        System.out.println("Podaj dzień sprzedaży od 1 do 31:");
-        String dzieńSprz = Main.scanner.nextLine();
-        int dzien = Integer.parseInt(dzieńSprz);
+        if (dataSprzedaży.isAfter(LocalDateTime.of(2020,1,1, 0,0)) && dataSprzedaży.isBefore(LocalDateTime.of(2020,3,1, 0,0)) ){
+            System.out.println("Data mieści się w zakresie.");
+        } else {
+            System.out.println("Data jest poza zakresem.");
+        }
 
         Sprzedaz sprzedaz = Sprzedaz.builder()
                 .cena(cena)
-                .dataCzasSprzedazy
-                        (LocalDateTime.of(2020,miesiac,dzien,0,0))
+                .dataCzasSprzedazy(dataSprzedaży)
                 .ilosc(liczba)
                 .build();
 
@@ -59,18 +62,19 @@ public class ObslugaDodajProduktZywnosc implements ObslugaKomendy {
         String stringLiczba2 = Main.scanner.nextLine();
         double liczba2 = Double.parseDouble(stringLiczba2);
 
-        System.out.println("Podaj miesiąc sprzedaży od 1 do 3:");
-        String miesSprz2 = Main.scanner.nextLine();
-        int miesiac2 = Integer.parseInt(miesSprz2);
+        System.out.println("Podaj datę i godzinę sprzedaży między 2020-01-01 a 2020-03-01 (YYYY-MM-DDThh:mm:ss)");
+        String dataSprz2 = Main.scanner.nextLine();
+        LocalDateTime dataSprzedaży2 = LocalDateTime.parse(dataSprz2);
 
-        System.out.println("Podaj dzień sprzedaży od 1 do 31:");
-        String dzieńSprz2 = Main.scanner.nextLine();
-        int dzien2= Integer.parseInt(dzieńSprz2);
+        if (dataSprzedaży2.isAfter(LocalDateTime.of(2020,1,1, 0,0)) && dataSprzedaży2.isBefore(LocalDateTime.of(2020,3,1, 0,0)) ){
+            System.out.println("Data mieści się w zakresie.");
+        } else {
+            System.out.println("Data jest poza zakresem.");
+        }
 
         Sprzedaz sprzedaz2 = Sprzedaz.builder()
                 .cena(cena2)
-                .dataCzasSprzedazy
-                        (LocalDateTime.of(2020,miesiac2,dzien2,0,0))
+                .dataCzasSprzedazy(dataSprzedaży2)
                 .ilosc(liczba2)
                 .build();
 
@@ -85,21 +89,21 @@ public class ObslugaDodajProduktZywnosc implements ObslugaKomendy {
         String stringLiczba3 = Main.scanner.nextLine();
         double liczba3 = Double.parseDouble(stringLiczba3);
 
-        System.out.println("Podaj miesiąc sprzedaży od 1 do 3:");
-        String miesSprz3 = Main.scanner.nextLine();
-        int miesiac3 = Integer.parseInt(miesSprz3);
+        System.out.println("Podaj datę i godzinę sprzedaży między 2020-01-01 a 2020-03-01 (YYYY-MM-DDThh:mm:ss)");
+        String dataSprz3 = Main.scanner.nextLine();
+        LocalDateTime dataSprzedaży3 = LocalDateTime.parse(dataSprz3);
 
-        System.out.println("Podaj dzień sprzedaży od 1 do 31:");
-        String dzieńSprz3 = Main.scanner.nextLine();
-        int dzien3 = Integer.parseInt(dzieńSprz3);
+        if (dataSprzedaży3.isAfter(LocalDateTime.of(2020,1,1, 0,0)) && dataSprzedaży3.isBefore(LocalDateTime.of(2020,3,1, 0,0)) ){
+            System.out.println("Data mieści się w zakresie.");
+        } else {
+            System.out.println("Data jest poza zakresem.");
+        }
 
         Sprzedaz sprzedaz3 = Sprzedaz.builder()
                 .cena(cena3)
-                .dataCzasSprzedazy
-                        (LocalDateTime.of(2020,miesiac3,dzien3,0,0))
+                .dataCzasSprzedazy(dataSprzedaży3)
                 .ilosc(liczba3)
                 .build();
-
 
         Produkt produkt1 = Produkt.builder()
                 .nazwa(nazwa1)
@@ -115,8 +119,6 @@ public class ObslugaDodajProduktZywnosc implements ObslugaKomendy {
                 .nazwa(nazwa3)
                 .kategoria(Kategoria.ZYWNOSC)
                 .build();
-
-
 
 
         try (Session session = HibernateUtil.INSTANCE.getSessionFactory().openSession()) {

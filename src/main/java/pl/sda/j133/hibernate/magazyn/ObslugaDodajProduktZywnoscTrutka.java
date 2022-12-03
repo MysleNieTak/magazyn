@@ -18,7 +18,7 @@ public class ObslugaDodajProduktZywnoscTrutka implements ObslugaKomendy {
     }
 
     public void obslugaKomendy() {
-        System.out.println("Podaj nazwe trutki:");
+        System.out.println("Podaj nazwę trutki:");
         String nazwa1 = Main.scanner.nextLine();
 
         Produkt produkt1 = Produkt.builder()
